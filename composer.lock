@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "f2bcdb3de510227c3b067117eb343a8e",
+    "content-hash": "473aa974300da21622ec4e48c0d5420a",
     "packages": [
         {
             "name": "composer/installers",
@@ -124,7 +125,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/auth/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
@@ -140,7 +141,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/core/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
@@ -156,7 +157,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/docs/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
@@ -172,7 +173,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/email/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
@@ -188,7 +189,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/oil/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
@@ -204,7 +205,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/orm/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
@@ -220,7 +221,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/fuel/parser/archive/1.7/master.zip",
-                "reference": null,
+                "reference": "1.8/develop",
                 "shasum": null
             },
             "type": "fuel-package"
