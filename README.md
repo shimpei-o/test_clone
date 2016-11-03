@@ -1,24 +1,22 @@
-# FuelPHPインストール方法
-
-fuelphp用のディレクトリを作成、移動する。
+### 開発環境作成
+Bitbucket(https://bitbucket.org/nesah/test_service)からソースをクローンする．
 ```
-$ mkdir Test_Service
-$ cd Test_Service
+$ git clone git@bitbucket.org:nesah/test_service.git
 ```
 
-次にfuelphpをダウンロードするため下記コマンドを実行。
+ディレクトリを移動し、 一部ディレクトリのパーミッションを変更する．
+ブラウザにアクセス(localhost:8000)してトップページが表示されればインストール完了．
 ```
-$ curl http://fuelphp.com/files/download/28 -o fuelphp-1.7.2.zip
-```
-
-zip解凍したら、移動して、名前変える。
-ディレクトリのパーミッションを変更するコマンドを打って、パーミッションを変更。
-ブラウザアクセスして welcome! が表示されればインストール完了。
-```
-$ unzip fuelphp-1.7.2.zip
-$ cd fuelphp-1.7.2
-$ mv fuelphp-1.7.2 fuel
+$ cd test_service
+$ composer install
 $ php oil refine install
-$ chmod -R 755 fuel
 $ php oil server
+```
+
+### 開発ブランチ
+下記の目的で各ブランチを使用する
+```
+master: 本番リリース用
+dev: 開発ソースマージ，STG環境確認用 (dev_YOURNAMEからはコチラのブランチにPRを出す)
+dev_YOURNAME: 個々人のローカル環境での開発ブランチ
 ```

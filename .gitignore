@@ -9,13 +9,13 @@
 build
 .idea
 nbproject/
+*.swp
 
 # hidden files created by Windows
 Thumbs.db
 desktop.ini
 
-# the composer package lock file and install directory
-/composer.lock
+# the composer install directory
 /fuel/vendor
 
 # any of the fuel packages installed by default
