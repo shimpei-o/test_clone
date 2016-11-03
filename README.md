@@ -1,5 +1,5 @@
 ### 開発環境作成
-Bitbucket(https://bitbucket.org/nesah/test_service)からソースをクローンする．
+Bitbucket([https://bitbucket.org/nesah/test_service](https://bitbucket.org/nesah/test_service))からソースをクローンする．
 ```
 $ git clone git@bitbucket.org:nesah/test_service.git
 ```
@@ -14,7 +14,7 @@ $ php oil server
 ```
 
 ### 開発ブランチ
-下記の目的で各ブランチを使用する.
+下記の目的で各ブランチを使用する．
 ```
 master: 本番リリース用
 dev: 開発ソースマージ，STG環境確認用 (dev_YOURNAMEからはコチラのブランチにPRを出す)
