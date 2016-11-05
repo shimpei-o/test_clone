@@ -12,7 +12,21 @@ $ composer install
 $ php oil refine install
 $ php oil server
 ```
-Couchbase を brew で インストールし、
+
+MySQLを brew でインストールし、サーバーが立ち上がり、
+アクセスできればインストール完了
+```
+$ brew install mysql
+$ mysql.server start
+$ mysql -uroot
+```
+
+MySQLのバージョンは下記コマンドで確認する
+```
+$ brew info mysql
+```
+
+Couchbase を brew でインストールし、
 ブラウザにアクセス(localhost:8091)すると、セットアップ画面が表示される。
 セットアップが終わり管理画面が表示されればインストール完了
 ```
