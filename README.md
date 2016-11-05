@@ -12,6 +12,15 @@ $ composer install
 $ php oil refine install
 $ php oil server
 ```
+Couchbase を brew で インストールし、
+ブラウザにアクセス(localhost:8091)すると、セットアップ画面が表示される。
+セットアップが終わり管理画面が表示されればインストール完了
+```
+$ brew install Caskroom/cask/couchbase-server-community
+$ open ./Applications/Couchbase\ Server.app
+$ ブラウザで確認．
+$ http://localhost:8091/index.html
+```
 
 ### 開発ブランチ
 下記の目的で各ブランチを使用する．
