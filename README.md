@@ -21,6 +21,18 @@ $ mysql.server start
 $ mysql -uroot
 ```
 
+root 以外のユーザー名を作成する。
+ユーザー名, ホスト名, パスワードを入力する。
+```
+mysql> create user
+    -> 'oyama'@'localhost' identified by 'pass';
+```
+
+作成したユーザー一覧は下記コマンドで確認できる。
+```
+mysql> select user, host from mysql.user;
+```
+
 MySQLのバージョンは下記コマンドで確認する
 ```
 $ brew info mysql
