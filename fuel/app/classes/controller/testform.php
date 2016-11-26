@@ -1,6 +1,7 @@
 <?php
 
 require_once('/Users/shimpei/vagrant/Test_Service/fuel/vendor/autoload.php');
+//require_once('/Users/shimpei/vagrant/Test_Service/fuel/vendor/Twig_cp/Autoloader.php');
 
 use Goutte\Client;
 
@@ -53,9 +54,21 @@ class Controller_Testform extends Controller
         $crawler = $client->request('GET', $crawling_url);
         sleep(1);
 
-        $test = $crawler->filter("h3")->nextAll();
+       // タイトルをスクレイプ
+//        $title = $crawler->filter("h3 a")->each(function($element){
+//            echo $element->text()."\n";
+//        });
+       // はてぶ数をスクレイプ
+//        $hateb_count = $crawler->filter("span.users a")->each(function($element){
+//            echo $element->text()."\n";
+//        });
 
-        Response::forge(View::forge('testform/index.twig'));
+        Twig_Autoloader::register();
+        $loader = new Twig_Loader_Filesystem("/Users/shimpei/vagrant/Test_Service/fuel/app/views/");
+        $twig = new Twig_Environment($loader, array("cache" => "cache/", "debug" => true));
+        $template = $twig->loadTemplate("base.html.twig");
+        $test = Uri::create("testform");
+        $template->display(array("title" => "トップページ", "categorytop" => $test));
 
         return $layout;
     }
