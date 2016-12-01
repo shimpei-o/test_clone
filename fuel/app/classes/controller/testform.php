@@ -1,7 +1,8 @@
 <?php
 
-require_once('/Users/shimpei/vagrant/Test_Service/fuel/vendor/autoload.php');
-//require_once('/Users/shimpei/vagrant/Test_Service/fuel/vendor/Twig_cp/Autoloader.php');
+require_once(dirname(__FILE__).'/../../../vendor/autoload.php');
+
+require_once(dirname(__FILE__).'/../../../vendor/twig/twig/lib/Twig/Autoloader.php');
 
 use Goutte\Client;
 
@@ -16,16 +17,11 @@ class Controller_Testform extends Controller
      */
     public function action_index()
     {
-        $layout = View::forge('common/tmphtml');
-
-        // 入力ページのタイトルをセット
-        $layout->set("page_title", "入力フォーム");
-
         // 入力値の出力先URLを生成・セット
-        $layout->contents = View::forge("testform/index");
-        $layout->contents->set("result_url", Uri::create("testform/getdata"));
+        $output_url = View::forge("testform/index");
+        $output_url->set("result_url", Uri::create("testform/getdata"));
 
-        return $layout;
+        return $output_url;
     }
 
     /**
@@ -34,18 +30,7 @@ class Controller_Testform extends Controller
      */
     public function get_getdata()
     {
-        $layout = View::forge('common/tmphtml');
-
         $client = new Client();
-
-        $layout->set_global("categorytop", '<a href="' . Uri::create("testform") . '">フォームへ戻る</a>', false);
-
-        // 結果ページベースになるHTMLにデータセット
-        $layout->set("page_title", "結果ページ");
-
-        // メインコンテンツのデータを取得し、セットする
-        $layout->contents = View::forge("testform/getdata");
-        $layout->contents->set("method", "keyword");
 
         $form_data = Input::get('keyword');
 
@@ -54,22 +39,20 @@ class Controller_Testform extends Controller
         $crawler = $client->request('GET', $crawling_url);
         sleep(1);
 
-       // タイトルをスクレイプ
-//        $title = $crawler->filter("h3 a")->each(function($element){
-//            echo $element->text()."\n";
-//        });
-       // はてぶ数をスクレイプ
-//        $hateb_count = $crawler->filter("span.users a")->each(function($element){
-//            echo $element->text()."\n";
-//        });
+        // タイトルをスクレイプ
+        $title = $crawler->filter("h3 a")->each(function($element){
+            echo $element->text()."\n";
+        });
+        // はてぶ数をスクレイプ
+        $hatdeb_count = $crawler->filter("span.users a")->each(function($element){
+            echo $element->text()."\n";
+        });
 
         Twig_Autoloader::register();
-        $loader = new Twig_Loader_Filesystem("/Users/shimpei/vagrant/Test_Service/fuel/app/views/");
+        $loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/../../views/');
         $twig = new Twig_Environment($loader, array("cache" => "cache/", "debug" => true));
         $template = $twig->loadTemplate("base.html.twig");
         $test = Uri::create("testform");
         $template->display(array("title" => "トップページ", "categorytop" => $test));
-
-        return $layout;
     }
 }
