@@ -80,7 +80,7 @@ return array(
 	 */
 	// 'language'           => 'en', // Default language
 	// 'language_fallback'  => 'en', // Fallback language when file isn't available for default language
-	 'locale'             => 'ja_JP.UTF-8', // PHP set_locale() setting, null to not set
+	'locale' => 'ja_JP.UTF-8', // PHP set_locale() setting, null to not set
 
 	/**
 	 * Internal string encoding charset
@@ -94,7 +94,7 @@ return array(
 	 * default_timezone		optional, if you want to change the server's default timezone
 	 */
 	// 'server_gmt_offset'  => 0,
-	'default_timezone'   => 'Asia/Tokyo',
+	'default_timezone' => 'Asia/Tokyo',
 
 	/**
 	 * Logging Threshold.  Can be set to any of the following:
@@ -137,7 +137,7 @@ return array(
 		 * WARNING: Using xss_clean will cause a performance hit.
 		 * How much is dependant on how much input data there is.
 		 */
-		'uri_filter'       => array('htmlentities'),
+		'uri_filter' => array('htmlentities'),
 
 		/**
 		 * This input filter can be any normal PHP function as well as 'xss_clean'
@@ -153,7 +153,7 @@ return array(
 		 * WARNING: Using xss_clean will cause a performance hit.
 		 * How much is dependant on how much input data there is.
 		 */
-		'output_filter'  => array('Security::htmlentities'),
+		'output_filter' => array('Security::htmlentities'),
 
 		/**
 		 * Encoding mechanism to use on htmlentities()
@@ -271,9 +271,9 @@ return array(
 		 *     array('auth'	=> PKGPATH.'auth/')
 		 * );
 		 */
-		 'packages'  => array(
-		// 	//'orm',
-			 'parser',
+		 'packages' => array(
+            //'orm',
+            'parser',
 		 ),
 
 		/**
