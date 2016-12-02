@@ -13,6 +13,41 @@ $ php oil refine install
 $ php oil server
 ```
 
+MySQLを brew でインストールし、サーバーが立ち上がり、
+アクセスできればインストール完了
+```
+$ brew install mysql
+$ mysql.server start
+$ mysql -uroot
+```
+
+root 以外のユーザー名を作成する。
+ユーザー名, ホスト名, パスワードを入力する。
+```
+mysql> create user
+    -> 'oyama'@'localhost' identified by 'pass';
+```
+
+作成したユーザー一覧は下記コマンドで確認できる。
+```
+mysql> select user, host from mysql.user;
+```
+
+MySQLのバージョンは下記コマンドで確認する
+```
+$ brew info mysql
+```
+
+Couchbase を brew でインストールし、
+ブラウザにアクセス(localhost:8091)すると、セットアップ画面が表示される。
+セットアップが終わり管理画面が表示されればインストール完了
+```
+$ brew install Caskroom/cask/couchbase-server-community
+$ open ./Applications/Couchbase\ Server.app
+$ ブラウザで確認．
+$ http://localhost:8091/index.html
+```
+
 ### 開発ブランチ
 下記の目的で各ブランチを使用する．
 ```
