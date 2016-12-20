@@ -20,7 +20,6 @@ class __TwigTemplate_94d9772b70fd71bf5ba2183507e601407a1b4dda778270e908a8fab5e58
 <html lang=\"ja\">
 <head>
     <title>クローリング結果</title>
-    <p>aaa</p>
 </head>
 <body>
     <div>
@@ -54,7 +53,6 @@ class __TwigTemplate_94d9772b70fd71bf5ba2183507e601407a1b4dda778270e908a8fab5e58
 <html lang=\"ja\">
 <head>
     <title>クローリング結果</title>
-    <p>aaa</p>
 </head>
 <body>
     <div>

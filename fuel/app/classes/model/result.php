@@ -1,13 +1,12 @@
 <?php
-use Orm\Model;
 
-class Model_Result extends Model
+class Model_Result extends Model_Crud
 {
-    protected static $_properties = array(
-        'id',
-        'title',
-        'hateb_count',
-        'url',
-    );
+    // テーブル名
+    protected static $_table_name = 'hatebs';
+
+    protected static $_created_at = 'created_at';
+
+    protected static $_updated_at = 'updated_at';
 
 }

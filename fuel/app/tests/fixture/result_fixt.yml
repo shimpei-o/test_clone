@@ -1,0 +1,22 @@
+---
+-
+    id: 1
+    title: 小野小町
+    hateb_count: 100
+    url: http://www.programming-magic.com/20071004015528/
+    created_at: 1333524234
+    updated_at: 1333524234
+-
+    id: 2
+    title: 葛飾北斎
+    hateb_count: 150
+    url: http://www.mogumagu.com/wp/wordpress/archives/1198
+    created_at: 1333534305
+    updated_at: 1333534305
+-
+    id: 3
+    title: 清原博一
+    hateb_count: 1000
+    url: http://qiita.com/ave/items/0502972040ae745380e8
+    created_at: 1333535267
+    updated_at: 1333535267
