@@ -23,26 +23,11 @@ class Controller_Testform extends Controller
     }
 
     /**
-     * @return object フォーム入力値のオブジェクト
-     *
-     */
-    public function action_keyword()
-    {
-        $keyword_object = View::forge("testform/result");
-        $keyword_object->set("keyword", Input::post('keyword'));
-
-        return $keyword_object;
-
-    }
-
-    /**
      * post送信の値を受け取る
      *
      */
     public function action_result()
     {
-        echo $this->action_keyword();
-
         $client = new Client();
 
         $pages_url = array();
@@ -99,12 +84,11 @@ class Controller_Testform extends Controller
 
         }
 
-        $all_data = array();
-
         for($i4=0; $i4<count($article_title); $i4++)
         {
-            $aa = $this->db_url($article_url[$i4]);
-            if($aa === true)
+            // DBに登録するURL
+            $db_url = $this->db_url($article_url[$i4]);
+            if($db_url === true)
             {
                 //何もしない
             }
@@ -118,17 +102,35 @@ class Controller_Testform extends Controller
                 );
 
                 // resultモデルにdataを保存
-                $new = Model_Result::forge($data)->save();
-
-                $all_data[] = $data;
+                Model_Result::forge($data)->save();
             }
         }
+
+        $all_data = array(
+                        'url' => $article_url,
+                        'title' => $article_title,
+                        'hateb_count' => $article_hateb_count,
+        );
 
         $loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/../../views/');
         $twig = new Twig_Environment($loader, array("cache" => "cache/", "debug" => true));
         $template = $twig->loadTemplate("base.html.twig");
-        $test = Uri::create("testform");
-        $template->display(array("title" => "トップページ", "categorytop" => $test));
+        $back_to_top = Uri::create("testform");
+        $template->display(array("title" => "トップページ", "categorytop" => $back_to_top));
+
+//TODO: ページング処理がしたい
+//$page_num = count($article_url);
+//$pagination = ceil($page_num/40);
+
+        $scraping_result_object = View::forge("testform/result");
+
+        $scraping_result_object->set("article_url", $all_data);
+        $scraping_result_object->set("keyword", Input::post('keyword'));
+
+//TODO: GETパラメータでページング処理できるようにする
+//$scraping_result_object->set("pagination", $pagination);
+
+        return $scraping_result_object;
 
     }
 
