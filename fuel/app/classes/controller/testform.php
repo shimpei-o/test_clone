@@ -7,6 +7,8 @@ class Controller_Testform extends Controller
     const HATEB_SEARCH_URL = "http://b.hatena.ne.jp/search/text";
     const HATEB_KEYWORD_PARAMETER = "?q=";
     const HATEB_BOOKMARK_COUNT_50 = "&users=50";
+    const DATA_PER_PAGE = 40;
+    const URI_SEGMENT = 3;
 
     /**
      * 入力ページに値をセットする
@@ -23,16 +25,16 @@ class Controller_Testform extends Controller
     }
 
     /**
-     * post送信の値を受け取る
+     * 入力キーワードに応じたデータをスクレイピングする
      *
      */
-    public function action_result()
+    public function scraping()
     {
         $client = new Client();
 
         $pages_url = array();
 
-        $pages_url[] = $this::HATEB_SEARCH_URL . $this::HATEB_KEYWORD_PARAMETER . Input::post('keyword') . $this::HATEB_BOOKMARK_COUNT_50;
+        $pages_url[] = $this::HATEB_SEARCH_URL . $this::HATEB_KEYWORD_PARAMETER . urlencode(Input::post('keyword')) . $this::HATEB_BOOKMARK_COUNT_50;
 
         // 1ページ目にアクセスする
         $crawler = $client->request('GET', $pages_url[0]);
@@ -50,6 +52,7 @@ class Controller_Testform extends Controller
 
         // 1ページ目に掲載の 記事URL をスクレイプ
         $article_url = $crawler->filter("h3 a")->extract("href");
+
 
         $article_title = array();
         $article_hateb_count = array();
@@ -96,21 +99,28 @@ class Controller_Testform extends Controller
             {
                 // DBのカラムにスクレイピングデータをセット
                 $data = array(
-                    'urls'         => $article_url[$i4],
                     'titles'       => $article_title[$i4],
                     'hateb_counts' => (int)$article_hateb_count[$i4],
+                    'urls'         => $article_url[$i4],
+                    'keyword'      => Input::get('keyword'),
+
                 );
 
                 // resultモデルにdataを保存
                 Model_Result::forge($data)->save();
             }
         }
+    }
 
-        $all_data = array(
-                        'url' => $article_url,
-                        'title' => $article_title,
-                        'hateb_count' => $article_hateb_count,
-        );
+
+    /**
+     * 結果ページにデータを渡す
+     *
+     */
+    public function action_result()
+    {
+        // データをスクレイピング
+        $this->scraping();
 
         $loader = new Twig_Loader_Filesystem(dirname(__FILE__).'/../../views/');
         $twig = new Twig_Environment($loader, array("cache" => "cache/", "debug" => true));
@@ -118,17 +128,12 @@ class Controller_Testform extends Controller
         $back_to_top = Uri::create("testform");
         $template->display(array("title" => "トップページ", "categorytop" => $back_to_top));
 
-//TODO: ページング処理がしたい
-//$page_num = count($article_url);
-//$pagination = ceil($page_num/40);
+        $page=empty($_GET["page"])?1:$_GET["page"];
+        (int)$limit = $this::DATA_PER_PAGE * $page;
 
-        $scraping_result_object = View::forge("testform/result");
-
-        $scraping_result_object->set("article_url", $all_data);
-        $scraping_result_object->set("keyword", Input::post('keyword'));
-
-//TODO: GETパラメータでページング処理できるようにする
-//$scraping_result_object->set("pagination", $pagination);
+        $scraping_result_object = View::forge('testform/result');
+        $scraping_result_object->set("page", $page);
+        $scraping_result_object->set("limit", $limit);
 
         return $scraping_result_object;
 
